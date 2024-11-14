@@ -10,7 +10,13 @@ use Twilio\Rest\Client as TwilioClient;
 
 class VisitController extends Controller
 {
-
+protected $woocommerceUrl = 'https://www.lapepite.co.il/wp-json/wc/v3/';
+    protected $consumerKey = 'ck_a5a9de9a4559d8d5bbe5e1fb9b2ab67f2f2a0ac2';
+    protected $consumerSecret = 'cs_8d03914496aa2797498f3f95037fb14bdda9f95f';
+    protected $twilioAccountSid = 'AC940608513a3f5d1afdc5615bbbe3c286';
+    protected $twilioAuthToken = '58645fcb1bef2b85c87b6c9a0b0f609b';
+    protected $twilioWhatsAppNumber = 'whatsapp:+14155238886';
+    
 protected function getLatestDraftProduct()
 {
     $response = $this->callWooCommerceApi('products', 'GET', [
@@ -229,7 +235,9 @@ public function addProductImage($productId, $mediaUrl)
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
     // Add headers explicitly with Basic Auth
-
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Basic ' . base64_encode('AC940608513a3f5d1afdc5615bbbe3c286:58645fcb1bef2b85c87b6c9a0b0f609b'),
+    ]);
 
     $response = curl_exec($ch);
 
